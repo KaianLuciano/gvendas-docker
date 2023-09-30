@@ -21,4 +21,8 @@ public class CategoriaService {
     public Categoria findById(Long idCategoria) {
         return categoriaRepository.findById(idCategoria).orElseThrow(() -> new DadoNaoEncontradoException("Categoria que representa o id " + idCategoria + " não encontrado."));
     }
+
+    public Categoria save(Categoria categoria) {
+        return categoriaRepository.save(categoria);
+    }
 }
