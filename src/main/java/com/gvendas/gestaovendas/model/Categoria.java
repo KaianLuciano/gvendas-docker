@@ -19,7 +19,5 @@ public class Categoria {
     private Long codigo;
     @Column(name = "nome")
     private String nome;
-    @OneToMany
-    private List<Produto> produtos;
 
 }
