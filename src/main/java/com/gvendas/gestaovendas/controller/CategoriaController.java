@@ -3,6 +3,7 @@ package com.gvendas.gestaovendas.controller;
 import com.gvendas.gestaovendas.model.Categoria;
 import com.gvendas.gestaovendas.service.CategoriaService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,12 +32,12 @@ public class CategoriaController {
 
     @Operation(summary = "Salva a categoria passada como parâmetro.")
     @PostMapping
-    public ResponseEntity<Categoria> save(@RequestBody Categoria categoria) {
+    public ResponseEntity<Categoria> save(@Valid @RequestBody Categoria categoria) {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaService.save(categoria));
     }
     @Operation(summary = "Atualiza a categoria que representa o código fornecido.")
     @PutMapping("/{codigo}")
-    public ResponseEntity<Categoria> update(@PathVariable(value = "codigo") Long codigo, @RequestBody Categoria categoriaAtualizada) {
+    public ResponseEntity<Categoria> update(@PathVariable(value = "codigo") Long codigo, @Valid @RequestBody Categoria categoriaAtualizada) {
         return ResponseEntity.ok(categoriaService.update(codigo, categoriaAtualizada));
     }
 
