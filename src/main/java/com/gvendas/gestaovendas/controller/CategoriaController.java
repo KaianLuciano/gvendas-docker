@@ -20,19 +20,24 @@ public class CategoriaController {
     @Operation(summary = "Lista todas categorias")
     @GetMapping
     public ResponseEntity<List<Categoria>> findAll() {
-        return ResponseEntity.ok().body(categoriaService.findAll());
+        return ResponseEntity.ok(categoriaService.findAll());
     }
 
     @Operation(summary = "Busca a categoria que representa o ID fornecido")
     @GetMapping("/{idCategoria}")
     public ResponseEntity<Categoria> findById(@PathVariable(value = "idCategoria") Long idCategoria) {
-        return ResponseEntity.ok().body(categoriaService.findById(idCategoria));
+        return ResponseEntity.ok(categoriaService.findById(idCategoria));
     }
 
     @Operation(summary = "Salva a categoria passada como parâmetro.")
     @PostMapping
     public ResponseEntity<Categoria> save(@RequestBody Categoria categoria) {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaService.save(categoria));
+    }
+    @Operation(summary = "Atualiza a categoria que representa o código fornecido.")
+    @PutMapping("/{codigo}")
+    public ResponseEntity<Categoria> update(@PathVariable(value = "codigo") Long codigo, @RequestBody Categoria categoriaAtualizada) {
+        return ResponseEntity.ok(categoriaService.update(codigo, categoriaAtualizada));
     }
 
 }

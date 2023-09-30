@@ -25,4 +25,10 @@ public class CategoriaService {
     public Categoria save(Categoria categoria) {
         return categoriaRepository.save(categoria);
     }
+
+    public Categoria update(Long codigo, Categoria categoria) {
+        Categoria categoriaEncontrada = categoriaRepository.findById(codigo).orElseThrow(() -> new DadoNaoEncontradoException("Categoria com o id " + codigo + " não encontrada."));
+        Categoria categoriaSalva = categoriaRepository.save(new Categoria(categoriaEncontrada, categoria));
+        return categoriaSalva;
+    }
 }
