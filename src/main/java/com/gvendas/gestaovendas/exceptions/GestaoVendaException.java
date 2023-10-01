@@ -1,5 +1,6 @@
 package com.gvendas.gestaovendas.exceptions;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -13,6 +14,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @ControllerAdvice
@@ -24,6 +26,14 @@ public class GestaoVendaException  extends ResponseEntityExceptionHandler {
     @ExceptionHandler(DadoNaoEncontradoException.class)
     public ResponseEntity<String> dadosNaoEncontrado(DadoNaoEncontradoException dadoNaoEncontradoException) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(dadoNaoEncontradoException.getMsg());
+    }
+
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public ResponseEntity<Object> dadosNaoEncontrado(EmptyResultDataAccessException ex, WebRequest request) {
+        String msgUsuario = "Recurso não encontrado";
+        String msgDesenvolvedor = ex.toString();
+        List<Erro> erros = Arrays.asList(new Erro(msgUsuario, msgDesenvolvedor));
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @Override
