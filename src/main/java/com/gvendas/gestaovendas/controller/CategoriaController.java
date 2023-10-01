@@ -41,4 +41,11 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaService.update(codigo, categoriaAtualizada));
     }
 
+    @Operation(summary = "Deleta a categoria que representa o código fornecido")
+    @DeleteMapping("/{codigo}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    private void delete(@PathVariable(value = "codigo") Long codigo) {
+        categoriaService.delete(codigo);
+    }
+
 }

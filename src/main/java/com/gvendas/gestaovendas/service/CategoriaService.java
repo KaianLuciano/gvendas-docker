@@ -31,4 +31,8 @@ public class CategoriaService {
         Categoria categoriaSalva = categoriaRepository.save(new Categoria(categoriaEncontrada, categoria));
         return categoriaSalva;
     }
+
+    public void delete(Long codigo) {
+        categoriaRepository.deleteById(codigo);
+    }
 }
