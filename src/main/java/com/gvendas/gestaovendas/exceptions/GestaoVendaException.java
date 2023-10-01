@@ -24,12 +24,12 @@ public class GestaoVendaException  extends ResponseEntityExceptionHandler {
     public static final String VALIDATION_NOT_LENGTH = "Length";
 
     @ExceptionHandler(DadoNaoEncontradoException.class)
-    public ResponseEntity<String> dadosNaoEncontrado(DadoNaoEncontradoException dadoNaoEncontradoException) {
+    public ResponseEntity<String> handleDadosNaoEncontrado(DadoNaoEncontradoException dadoNaoEncontradoException) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(dadoNaoEncontradoException.getMsg());
     }
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
-    public ResponseEntity<Object> dadosNaoEncontrado(EmptyResultDataAccessException ex, WebRequest request) {
+    public ResponseEntity<Object> handleEmptyResultDataAcessException(EmptyResultDataAccessException ex, WebRequest request) {
         String msgUsuario = "Recurso não encontrado";
         String msgDesenvolvedor = ex.toString();
         List<Erro> erros = Arrays.asList(new Erro(msgUsuario, msgDesenvolvedor));
