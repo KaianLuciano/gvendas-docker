@@ -28,8 +28,8 @@ public class CategoriaService {
         return categoriaRepository.save(categoria);
     }
 
-    public Categoria update(Long codigo, Categoria categoria) {
-        Categoria categoriaEncontrada = categoriaRepository.findById(codigo).orElseThrow(() -> new DadoNaoEncontradoException("Categoria com o id " + codigo + " não encontrada."));
+    public Categoria update(Categoria categoria) {
+        Categoria categoriaEncontrada = categoriaRepository.findById(categoria.getCodigo()).orElseThrow(() -> new DadoNaoEncontradoException("Categoria com o id " + categoria.getCodigo() + " não encontrada."));
         validarCategoriaDuplicada(categoria);
         Categoria categoriaSalva = categoriaRepository.save(new Categoria(categoriaEncontrada, categoria));
         return categoriaSalva;

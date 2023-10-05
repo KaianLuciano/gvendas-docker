@@ -37,8 +37,8 @@ public class CategoriaController {
     }
     @Operation(summary = "Atualiza a categoria que representa o código fornecido.")
     @PutMapping("/{codigo}")
-    public ResponseEntity<Categoria> update(@PathVariable(value = "codigo") Long codigo, @Valid @RequestBody Categoria categoriaAtualizada) {
-        return ResponseEntity.ok(categoriaService.update(codigo, categoriaAtualizada));
+    public ResponseEntity<Categoria> update(@Valid @RequestBody Categoria categoriaAtualizada) {
+        return ResponseEntity.ok(categoriaService.update(categoriaAtualizada));
     }
 
     @Operation(summary = "Deleta a categoria que representa o código fornecido")
