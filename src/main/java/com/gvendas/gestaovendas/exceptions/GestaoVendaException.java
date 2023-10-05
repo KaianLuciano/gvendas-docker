@@ -36,6 +36,14 @@ public class GestaoVendaException  extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
+    @ExceptionHandler(RegraNegocioException.class)
+    public ResponseEntity<Object> handleRegraNegocioException(RegraNegocioException ex, WebRequest request) {
+        String msgUsuario = ex.getMessage();
+        String msgDesenvolvedor = ex.getMessage();
+        List<Erro> erros = Arrays.asList(new Erro(msgUsuario, msgDesenvolvedor));
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         List<Erro> erros = gerenciarListaDeErros(ex.getBindingResult());
